@@ -59,7 +59,7 @@ for i in range(10):
 #Text
 
 #Images
-#dad
+
 #Sound
 
 
