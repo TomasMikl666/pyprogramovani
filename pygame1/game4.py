@@ -18,9 +18,10 @@ clock = pygame.time.Clock()
 class Enemy(pygame.sprite.Sprite):
     def __init__(self,x ,y ):
         super().__init__()
-        self.image = pygame.image.load("pyprogramovani/pygame1/img/enemy1.png")
+        self.image = pygame.image.load("pygame1/img/enemy1.png")
         self.rect = self.image.get_rect()
         self.rect.topleft = (x,y)
+
         self.speed = random.randint(1,6)
 
     def update(self):
@@ -38,7 +39,7 @@ for i in range(10):
 class Player(pygame.sprite.Sprite):
     def __init__(self,x,y):
         super().__init__()
-        self.image = pygame.image.load("pyprogramovani/pygame1/img/player.png")
+        self.image = pygame.image.load("pygame1/img/player.png")
         self.rect = self.image.get_rect()
         self.rect.topleft = (x,y)
         self.speed = random.randint(1,6)

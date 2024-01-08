@@ -32,10 +32,10 @@ white = (255,255,255)
 red = (255,0,0)
 
 #Fonty
-custom_font1 = pygame.font.Font("pyprogramovani/pygame1/fonts/font1/font1.ttf",50)
-custom_font2 = pygame.font.Font("pyprogramovani/pygame1/fonts/font1/font1.ttf",64)
-custom_font3 = pygame.font.Font("pyprogramovani/pygame1/fonts/font1/font1.ttf",164)
-custom_font4 = pygame.font.Font("pyprogramovani/pygame1/fonts/font1/font1.ttf",84)
+custom_font1 = pygame.font.Font("pygame1/fonts/font1/font1.ttf",50)
+custom_font2 = pygame.font.Font("pygame1/fonts/font1/font1.ttf",64)
+custom_font3 = pygame.font.Font("pygame1/fonts/font1/font1.ttf",164)
+custom_font4 = pygame.font.Font("pygame1/fonts/font1/font1.ttf",84)
 
 #TEXT
 boss_name_text = custom_font2.render("BOSS",True , white)
@@ -63,38 +63,38 @@ exit_text_rect = exit_text.get_rect()
 exit_text_rect.center = (width //2, height //1.3)
 
 #Zvuky
-sound_hit = pygame.mixer.Sound("pyprogramovani/pygame1/zvuk/hit2.mp3")
+sound_hit = pygame.mixer.Sound("pygame1/zvuk/hit2.mp3")
 sound_hit.set_volume(0.1)
 
-sound_heart_beat = pygame.mixer.Sound("pyprogramovani/pygame1/zvuk/hearth_beat.mp3")
+sound_heart_beat = pygame.mixer.Sound("pygame1/zvuk/hearth_beat.mp3")
 sound_heart_beat.set_volume(0.2)
 
-pygame.mixer.music.load("pyprogramovani/pygame1/zvuk/arcade_music1.mp3")
+pygame.mixer.music.load("pygame1/zvuk/arcade_music1.mp3")
 pygame.mixer.music.play(-1,0.0)
 pygame.mixer.music.set_volume(0.1)
 
 draha_Y = [550, 650, 750]
 #Obrazky
-player_image = pygame.image.load("pyprogramovani/pygame1/img/player.png")
+player_image = pygame.image.load("pygame1/img/player.png")
 player_image_rect = player_image.get_rect()
 player_image_rect.center = (950,680)
 
-enemy_image = pygame.image.load("pyprogramovani/pygame1/img/enemy1.png")
+enemy_image = pygame.image.load("pygame1/img/enemy1.png")
 enemy_image_rect = enemy_image.get_rect()
 enemy_image_rect.x = 600
 enemy_image_rect.centery = random.choice(draha_Y)
 
-enemy1_image = pygame.image.load("pyprogramovani/pygame1/img/enemy1.png")
+enemy1_image = pygame.image.load("pygame1/img/enemy1.png")
 enemy1_image_rect = enemy1_image.get_rect()
 enemy1_image_rect.x = 1350
 enemy1_image_rect.centery = random.choice(draha_Y)
 
-enemy2_image = pygame.image.load("pyprogramovani/pygame1/img/enemy4.png")
+enemy2_image = pygame.image.load("pygame1/img/enemy4.png")
 enemy2_image_rect = enemy2_image.get_rect()
 enemy2_image_rect.x = 1350
 enemy2_image_rect.centery = random.choice(draha_Y)
 
-boss_enemy_angry_image = pygame.image.load("pyprogramovani/pygame1/img/boss_enemy_angry.png")
+boss_enemy_angry_image = pygame.image.load("pygame1/img/boss_enemy_angry.png")
 boss_enemy_angry_image_rect = boss_enemy_angry_image.get_rect()
 boss_enemy_angry_image_rect.center = (1000,300)
 

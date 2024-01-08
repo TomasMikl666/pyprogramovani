@@ -25,11 +25,11 @@ enemy_x = random.choice([-1,1])
 enemy_y = random.choice([-1,1])
 
 #Images
-background_image = pygame.image.load("pyprogramovani/pygame1/img/background1.jpg")
+background_image = pygame.image.load("pygame1/img/background1.jpg")
 background_image_rect = background_image.get_rect()
 background_image_rect.topleft = (0,0)
 
-enemy_image = pygame.image.load("pyprogramovani/pygame1/img/enemy1.png")
+enemy_image = pygame.image.load("pygame1/img/enemy1.png")
 enemy_image_rect = enemy_image.get_rect()
 enemy_image_rect.center = (width/2, height/2)
 
@@ -39,9 +39,9 @@ white = (255,255,255)
 yellow = (230, 230, 0)
 
 #Fonts
-custom_font_medium = pygame.font.Font("pyprogramovani/pygame1/fonts/font1/font1.ttf",32)
-custom_font_medium_large = pygame.font.Font("pyprogramovani/pygame1/fonts/font1/font1.ttf",64)
-custom_font_big = pygame.font.Font("pyprogramovani/pygame1/fonts/font1/font1.ttf",128)
+custom_font_medium = pygame.font.Font("pygame1/fonts/font1/font1.ttf",32)
+custom_font_medium_large = pygame.font.Font("pygame1/fonts/font1/font1.ttf",64)
+custom_font_big = pygame.font.Font("pygame1/fonts/font1/font1.ttf",128)
 
 #Texts
 game_over_text = custom_font_big.render("GAME OVER",True,yellow)
@@ -49,9 +49,9 @@ game_over_text_rect = game_over_text.get_rect()
 game_over_text_rect.center = (width//2, height//2-150)
 
 #Sounds
-success_click = pygame.mixer.Sound("pyprogramovani/pygame1/zvuk/success_click.mp3")
-miss_click = pygame.mixer.Sound("pyprogramovani/pygame1/zvuk/miss_click.mp3")
-pygame.mixer.music.load("pyprogramovani/pygame1/zvuk/arcade_music1.mp3")
+success_click = pygame.mixer.Sound("pygame1/zvuk/success_click.mp3")
+miss_click = pygame.mixer.Sound("pygame1/zvuk/miss_click.mp3")
+pygame.mixer.music.load("pygame1/zvuk/arcade_music1.mp3")
 
 success_click.set_volume(0.2)
 miss_click.set_volume(0.2)

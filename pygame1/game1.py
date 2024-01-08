@@ -25,20 +25,20 @@ barva_pozadi = (192, 192, 192)
 screen.fill(barva_pozadi)
 
 # Obrázek "postava"
-postava_image = pygame.image.load("pyprogramovani/pygame1/img/postava.png")
+postava_image = pygame.image.load("pygame1/img/postava.png")
 postava_rect = postava_image.get_rect()
 postava_rect.center = (sirka // 2.5, vyska // 2.5)
 
 
 # Obrázek "poop"
-poop_image = pygame.image.load("pyprogramovani/pygame1/img/poop.png")
+poop_image = pygame.image.load("pygame1/img/poop.png")
 poop_rect = poop_image.get_rect()
 poop_rect.center = (sirka // 2, vyska // 2.5)
 
 #nastavení systémového fontu
 system_font = pygame.font.SysFont("calibri", 64)
-custom_font = pygame.font.Font("pyprogramovani/pygame1/fonts/font1/font1.ttf",32)
-custom_font2 = pygame.font.Font("pyprogramovani/pygame1/fonts/font1/font1.ttf",20)
+custom_font = pygame.font.Font("pygame1/fonts/font1/font1.ttf",32)
+custom_font2 = pygame.font.Font("pygame1/fonts/font1/font1.ttf",20)
 
 #Font a text ale custom
 
@@ -48,10 +48,10 @@ custom_text_rect = custom_text.get_rect()
 custom_text_rect.center = (540, 25)
 
 #Zvuky
-sound_boom = pygame.mixer.Sound("pyprogramovani/pygame1/zvuk/boom.wav")
+sound_boom = pygame.mixer.Sound("pygame1/zvuk/boom.wav")
 
 #Hudba v pozadí  
-pygame.mixer.music.load("pyprogramovani/pygame1/zvuk/lacrimosa.mp3")
+pygame.mixer.music.load("pygame1/zvuk/lacrimosa.mp3")
 pygame.mixer.music.play(-1,0.0)
 
 #Zmena Hlasitosti
