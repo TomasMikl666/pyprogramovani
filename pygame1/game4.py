@@ -32,9 +32,10 @@ class Game:
         pygame.mixer.music.set_volume(0.1)
 
         #Font
-        self.custom_font_small = pygame.font.Font("pygame1/fonts/font1/font1.ttf",24)
-        self.custom_font_medium = pygame.font.Font("pygame1/fonts/font1/font1.ttf",64)
-        self.custom_font_large = pygame.font.Font("pygame1/fonts/font1/font1.ttf",128)
+        self.custom_font_small = pygame.font.Font("pygame1/fonts/font2/font.ttf",24)
+        self.custom_font_small_medium = pygame.font.Font("pygame1/fonts/font2/font.ttf",32)
+        self.custom_font_medium = pygame.font.Font("pygame1/fonts/font2/font.ttf",64)
+        self.custom_font_large = pygame.font.Font("pygame1/fonts/font2/font.ttf",128)
     
     #Update game
     def update(self):
@@ -44,24 +45,31 @@ class Game:
             self.round_time += 1
             self.slow_down_cycle = 0
             print(self.round_time)
-    
-    #Collision check
-    
-    
+        self.hp_bar()
+
+        #Collision
+        self.check_collision() 
+     
     #Drawing images
     def draw(self):
-        
         #Colours
         black = (0,0,0)
         white = (255,255,255)
         red = (255,0,0)
+        purple = (209, 26, 255)
+        yellow = (215, 215, 40)
 
         #Text
          
-        hp_text = self.custom_font_small.render(f"HP {self.our_player.hp}", True, white)
+        hp_text = self.custom_font_small_medium.render(f"HP", True, white)
         hp_text_rect = hp_text.get_rect()
-        hp_text_rect.centerx = width // 2
-        hp_text_rect.centery = height // 1.1
+        hp_text_rect.centerx = width // 2.3
+        hp_text_rect.centery = height // 1.15
+
+        hp_counter = self.custom_font_small_medium.render(f"{self.our_player.hp}/{self.our_player.max_hp}", True, white)
+        hp_counter_rect = hp_counter.get_rect()
+        hp_counter_rect.centerx = width // 1.9
+        hp_counter_rect.centery = height // 1.15
 
         score_text= self.custom_font_small.render(f"SKORE {self.score}", True, white)
         score_text_rect = score_text.get_rect()
@@ -80,18 +88,44 @@ class Game:
 
         #Blitting
         screen.blit(hp_text,hp_text_rect)
+        screen.blit(hp_counter,hp_counter_rect)
         screen.blit(score_text,score_text_rect)
         screen.blit(round_text,round_text_rect)
         screen.blit(time_text,time_text_rect)
 
         #Objects
         pygame.draw.rect(screen, white,(width // 3, height // 2,width //3, height //3),10)
-    
+
+        pygame.draw.line(screen, purple, (width // 1.55, height // 1.75), (width//2.8, height//1.75),2) #UP
+
+        pygame.draw.line(screen, purple, (width // 1.55, height // 1.5), (width//2.8, height//1.5),2) #MID
+
+        pygame.draw.line(screen, purple, (width // 1.55, height // 1.3), (width//2.8, height//1.3 ),2) #DOWN
+
+    def hp_bar(self):
+        yellow = (255, 255, 0)  # Barva žlutá pro snížený HP
+        red = (255, 0, 0)  # Barva červená pro nízký HP
+
+        max_hp = 20  # Maximální počet životů
+        hp_percentage = self.our_player.hp / max_hp  # Poměr aktuálních životů k maximálnímu počtu
+
+        bar_width = 40  # Šířka HP baru
+        bar_height = 40  # Výška HP baru
+
+        # Vykreslení HP baru na nové pozici
+        pygame.draw.rect(screen, yellow, (width//2.2, height//1.18, bar_width * hp_percentage, bar_height))
+        pygame.draw.rect(screen, red, (width//2.2 + bar_width * hp_percentage, height//1.18, bar_width * (1 - hp_percentage), bar_height))
+
+        
     #Collision detection
     def check_collision(self):
         collided_enemy = pygame.sprite.spritecollideany(self.our_player, self.group_of_enemies)
-
         
+        if collided_enemy:
+            collided_enemy.remove(self.group_of_enemies)
+            self.our_player.hp -= 1
+            
+
             
     def start_new_level(self):
         pass
@@ -116,23 +150,45 @@ class Player(pygame.sprite.Sprite):
         self.rect.centerx = width//2  #Player spawn position X
         self.rect.centery = height //1.5 #Player spawn position Y
 
-        self.hp = 3
+        # Definujeme souřadnice, na které hráč může skákat
+        self.allowed_y_positions = [height // 1.75, height // 1.5, height // 1.3]
+        self.current_position_index = 1  # Začneme na střední lince
+        self.last_key_change = pygame.time.get_ticks()
+        self.key_change_delay = 200  # Časová prodleva v milisekundách
+
+        self.hp = 20
+        self.max_hp =20
         self.speed = 5
        
 
-        self.collision_sound = pygame.mixer.Sound("pygame1/zvuk/hit2.mp3")
+        self.collision_sound = pygame.mixer.Sound("pygame1/zvuk/punch_sound_effect.mp3")
         self.collision_sound.set_volume(0.2)
 
     def update(self):
+        
+        #Movement LEFT and RIGHT
         keys = pygame.key.get_pressed()
-        if (keys[pygame.K_LEFT] or keys[pygame.K_a]) and self.rect.left > width//3:  # Až budu dělat white rectangle tak přepíšu hodnoty
+        if (keys[pygame.K_LEFT] or keys[pygame.K_a]) and self.rect.left > width//2.85:  # Až budu dělat white rectangle tak přepíšu hodnoty
             self.rect.x -= self.speed
-        if (keys[pygame.K_RIGHT] or keys[pygame.K_d]) and self.rect.right < width//1.5:
+        if (keys[pygame.K_RIGHT] or keys[pygame.K_d]) and self.rect.right < width//1.53:
             self.rect.x += self.speed
-        if (keys[pygame.K_UP] or keys[pygame.K_w]) and self.rect.top > height//2:  # Až budu dělat white rectangle tak přepíšu hodnoty
-            self.rect.y -= self.speed
-        if (keys[pygame.K_DOWN] or keys[pygame.K_s]) and self.rect.bottom < height//1.2:
-            self.rect.y += self.speed
+
+        #Movement UP and DOWN
+        current_time = pygame.time.get_ticks()
+        if keys[pygame.K_UP] or keys[pygame.K_w]:
+            if current_time - self.last_key_change > self.key_change_delay:
+                if self.current_position_index > 0:  # Zabráníme skákání nad horní hranici seznamu
+                    self.current_position_index -= 1
+                    self.rect.centery = self.allowed_y_positions[self.current_position_index]
+                    self.last_key_change = current_time
+        elif keys[pygame.K_DOWN] or keys[pygame.K_s]:
+            if current_time - self.last_key_change > self.key_change_delay:
+                if self.current_position_index < len(self.allowed_y_positions) - 1:  # Zabráníme skákání pod dolní hranici seznamu
+                    self.current_position_index += 1
+                    self.rect.centery = self.allowed_y_positions[self.current_position_index]
+                    self.last_key_change = current_time
+        
+        
 
     def reset(self):
         pass
@@ -144,7 +200,7 @@ class Enemy(pygame.sprite.Sprite):
         #Image
         self.image = image
         self.rect = self.image.get_rect()
-        self.rect.center = (width//2,height//1.5) # enemy spawn position
+        self.rect.center = (width//2.8,height//1.5) # enemy spawn position
 
         #types of enemy
         self.enemy_type = enemy_type
@@ -171,7 +227,7 @@ class Enemy(pygame.sprite.Sprite):
 enemy_group = pygame.sprite.Group()
 
 #Testing
-one_enemy = Enemy(500,500 ,pygame.image.load("pygame1/img/enemy1.png"),0)
+one_enemy = Enemy(500,500 ,pygame.image.load("pygame1/img/enemy1-1.png"),0)
 enemy_group.add(one_enemy)
 one_enemy = Enemy(500,500 ,pygame.image.load("pygame1/img/enemy2.png"),1)
 enemy_group.add(one_enemy)
@@ -203,13 +259,14 @@ while running:
     enemy_group.draw(screen)
     enemy_group.update()
 
-    #Group of playrs update
-    player_group.draw(screen)
-    player_group.update()
+    
 
     #Object update
     my_game.update()
     my_game.draw()
+    #Group of playrs update
+    player_group.draw(screen)
+    player_group.update()
 
     #Update screen
     pygame.display.update()
