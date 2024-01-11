@@ -7,7 +7,7 @@ pygame.init()
 #Screen
 width = 1800  #X
 height = 900  #Y
-screen = pygame.display.set_mode((width,height))
+screen = pygame.display.set_mode((width,height)) 
 pygame.display.set_caption("Game")
 
 #Basic Settings
@@ -200,7 +200,7 @@ class Enemy(pygame.sprite.Sprite):
         #Image
         self.image = image
         self.rect = self.image.get_rect()
-        self.rect.center = (width//2.8,height//1.5) # enemy spawn position
+        self.rect.center = (width//1.7,height//1.7) # enemy spawn position
 
         #types of enemy
         self.enemy_type = enemy_type
@@ -208,7 +208,8 @@ class Enemy(pygame.sprite.Sprite):
         #Set enemy movement
         self.x = random.choice([-1, 1])
         self.y = random.choice([-1, 1])
-        self.speed = random.randint(1,5)
+        self.speed = random.randint(1,2)
+
 
     def update(self):
         #Enemy movement
@@ -223,18 +224,14 @@ class Enemy(pygame.sprite.Sprite):
 
 
 # ============ USING LOGIC ===============
-#Group of enemies
+#Group of enemies                                            
 enemy_group = pygame.sprite.Group()
 
 #Testing
-one_enemy = Enemy(500,500 ,pygame.image.load("pygame1/img/enemy1-1.png"),0)
+one_enemy = Enemy(width//1.35,height//1.70 ,pygame.image.load("pygame1/img/enemy1-1.png"),0)
+
 enemy_group.add(one_enemy)
-one_enemy = Enemy(500,500 ,pygame.image.load("pygame1/img/enemy2.png"),1)
-enemy_group.add(one_enemy)
-one_enemy = Enemy(500,500 ,pygame.image.load("pygame1/img/enemy3.png"),2)
-enemy_group.add(one_enemy)
-one_enemy = Enemy(500,500 ,pygame.image.load("pygame1/img/enemy4.png"),3)
-enemy_group.add(one_enemy)
+ 
 
 #Group of players
 player_group = pygame.sprite.Group()
@@ -255,15 +252,12 @@ while running:
     #Screen fill
     screen.fill((0, 0, 0))
     
-    #Group of enemies update
-    enemy_group.draw(screen)
-    enemy_group.update()
-
-    
-
     #Object update
     my_game.update()
     my_game.draw()
+    #Group of enemies update
+    enemy_group.draw(screen)
+    enemy_group.update()
     #Group of playrs update
     player_group.draw(screen)
     player_group.update()
