@@ -7,7 +7,7 @@ pygame.init()
 #Screen
 width = 1800  #X
 height = 900  #Y
-screen = pygame.display.set_mode((width,height)) 
+SCREEN = pygame.display.set_mode((width,height)) 
 pygame.display.set_caption("Game")
 
 #Basic Settings
@@ -87,20 +87,20 @@ class Game:
         time_text_rect.centery = height // 4
 
         #Blitting
-        screen.blit(hp_text,hp_text_rect)
-        screen.blit(hp_counter,hp_counter_rect)
-        screen.blit(score_text,score_text_rect)
-        screen.blit(round_text,round_text_rect)
-        screen.blit(time_text,time_text_rect)
+        SCREEN.blit(hp_text,hp_text_rect)
+        SCREEN.blit(hp_counter,hp_counter_rect)
+        SCREEN.blit(score_text,score_text_rect)
+        SCREEN.blit(round_text,round_text_rect)
+        SCREEN.blit(time_text,time_text_rect)
 
         #Objects
-        pygame.draw.rect(screen, white,(width // 3, height // 2,width //3, height //3),10)
+        pygame.draw.rect(SCREEN, white,(width // 3, height // 2,width //3, height //3),10)
 
-        pygame.draw.line(screen, purple, (width // 1.55, height // 1.75), (width//2.8, height//1.75),2) #UP
+        pygame.draw.line(SCREEN, purple, (width // 1.55, height // 1.75), (width//2.8, height//1.75),2) #UP
 
-        pygame.draw.line(screen, purple, (width // 1.55, height // 1.5), (width//2.8, height//1.5),2) #MID
+        pygame.draw.line(SCREEN, purple, (width // 1.55, height // 1.5), (width//2.8, height//1.5),2) #MID
 
-        pygame.draw.line(screen, purple, (width // 1.55, height // 1.3), (width//2.8, height//1.3 ),2) #DOWN
+        pygame.draw.line(SCREEN, purple, (width // 1.55, height // 1.3), (width//2.8, height//1.3 ),2) #DOWN
 
     def hp_bar(self):
         yellow = (255, 255, 0)  # Barva žlutá pro snížený HP
@@ -113,8 +113,8 @@ class Game:
         bar_height = 40  # Výška HP baru
 
         # Vykreslení HP baru na nové pozici
-        pygame.draw.rect(screen, yellow, (width//2.2, height//1.18, bar_width * hp_percentage, bar_height))
-        pygame.draw.rect(screen, red, (width//2.2 + bar_width * hp_percentage, height//1.18, bar_width * (1 - hp_percentage), bar_height))
+        pygame.draw.rect(SCREEN, yellow, (width//2.2, height//1.18, bar_width * hp_percentage, bar_height))
+        pygame.draw.rect(SCREEN, red, (width//2.2 + bar_width * hp_percentage, height//1.18, bar_width * (1 - hp_percentage), bar_height))
 
         
     #Collision detection
@@ -250,16 +250,16 @@ while running:
             running = False
 
     #Screen fill
-    screen.fill((0, 0, 0))
+    SCREEN.fill((0, 0, 0))
     
     #Object update
     my_game.update()
     my_game.draw()
     #Group of enemies update
-    enemy_group.draw(screen)
+    enemy_group.draw(SCREEN)
     enemy_group.update()
     #Group of playrs update
-    player_group.draw(screen)
+    player_group.draw(SCREEN)
     player_group.update()
 
     #Update screen

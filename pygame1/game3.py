@@ -7,7 +7,7 @@ pygame.init()
 #Screen
 width = 1080
 height = 640
-screen = pygame.display.set_mode((width,height))
+SCREEN = pygame.display.set_mode((width,height))
 pygame.display.set_caption("Game")
 
 #Basic settings
@@ -109,12 +109,12 @@ while running:
     lives_text_rect = lives_text.get_rect()
     lives_text_rect.topleft = (100,20)
     #Images
-    screen.blit(background_image, background_image_rect)
-    screen.blit(enemy_image, enemy_image_rect)
+    SCREEN.blit(background_image, background_image_rect)
+    SCREEN.blit(enemy_image, enemy_image_rect)
 
     #Texts
-    screen.blit(score_text, score_text_rect)
-    screen.blit(lives_text, lives_text_rect)
+    SCREEN.blit(score_text, score_text_rect)
+    SCREEN.blit(lives_text, lives_text_rect)
     retry_text = custom_font_medium_large.render(f"SKORE {score}",True,yellow)
     retry_text_rect = retry_text.get_rect()
     retry_text_rect.center = (width//2, height//2)
@@ -126,8 +126,8 @@ while running:
 
     #End screen check
     if player_lives == 0:
-        screen.blit(game_over_text, game_over_text_rect)
-        screen.blit(retry_text, retry_text_rect)
+        SCREEN.blit(game_over_text, game_over_text_rect)
+        SCREEN.blit(retry_text, retry_text_rect)
         pygame.display.update()
 
         pygame.mixer.music.stop()

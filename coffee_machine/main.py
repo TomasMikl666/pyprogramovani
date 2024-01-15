@@ -10,10 +10,10 @@
 
 
 #NAPIŠ report PRO KONTROLU MNOŽSTVÍ SUROVIN
-from automatslovnik import MENU
-from automatslovnik import resources
+from machine_dict import MENU
+from machine_dict import resources
 
-def odecti_zdroje(typ):
+def odecti_zdroje(typ:str) -> None:
     voda_epresso =MENU[typ]["ingredients"]["water"]
     mleko_epresso =MENU[typ]["ingredients"]["milk"]
     kava_epresso =MENU[typ]["ingredients"]["coffee"]
@@ -28,7 +28,7 @@ def odecti_zdroje(typ):
     elif resources["coffee"] < kava_epresso:
         print("Není káva")
 
-def placeni():
+def placeni() -> int:
     celkovy_penize = 0
     print("Vložte mince: 1, 2, 5, 10, 20, 50")
     zadej_kolik_jednokorun = int(input("Zadej počet 1: "))
@@ -51,7 +51,7 @@ def placeni():
     print(f"Celkem jste vložili: {celkovy_penize}") 
     return celkovy_penize
 
-def druh_kavy(typ):
+def druh_kavy(typ:str):
     cena_espresso = MENU[typ]["cost"]
     platba = placeni()
     
@@ -73,7 +73,7 @@ def kontrola_zdroju():
     print(f"Mléko:{mleko_resources}")
     print(f"Káva:{kava_resources}")
 
-def doplneni_zdroju():
+def doplneni_zdroju() -> None:
     konec = False
     while not konec:
         doplneni = input("Pro doplňěné zadej: 'voda' , 'mleko', 'kava' nebo konec: ")
