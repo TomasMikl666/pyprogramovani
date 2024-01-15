@@ -21,4 +21,4 @@ player1.check_age()
 
 player2= WizardPlayer(zadej,zadej2)
 print(player2.name,player2.age)
-player2.check_age()
+player2.check_age() 
