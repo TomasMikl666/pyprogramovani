@@ -2,7 +2,7 @@ from tkinter import *
 
 #Screen
 SCREEN = Tk()
-SCREEN.title = "Přepočet kurzu"
+SCREEN.title = ("Přepočet kurzu")
 SCREEN.geometry("500x500+600+300")
 SCREEN.resizable(width=True,height=True)
 SCREEN.minsize(width = 400,height=400)

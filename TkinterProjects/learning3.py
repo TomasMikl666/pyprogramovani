@@ -3,7 +3,7 @@ from PIL import Image, ImageTk
 #Screen
 SCREEN = Tk()
 SCREEN.title("Money Exchange")
-SCREEN.geometry("450x200+600+300")
+SCREEN.geometry("450x250+600+300")
 SCREEN.minsize(250,250)
 SCREEN.iconbitmap("TkinterProjects/project1/assets/money_bag.ico")
 SCREEN.resizable(True,True)
@@ -13,6 +13,7 @@ SCREEN.config(bg="#6fc77e")
 def count_currency():
     amount_eur = float(amount_input.get()) / 24.58
     result_label["text"] = round(amount_eur,2)
+    
 
 
 #Input
@@ -31,8 +32,8 @@ euro_currency = Label(text= "EUR", font=("Helvitca",14,"bold"),borderwidth=5,rel
 euro_currency .grid(row=1,column=1, padx=20)
 
 #Button
-exchange_button = Button(text="Exchange",command = count_currency,borderwidth=5,relief="groove",font=("Helvitca",12,"bold"))
-exchange_button.grid(row=0,column=2, padx=10)
+exchange_button = Button(text="Exchange",command = count_currency,borderwidth=5,relief="groove")
+exchange_button.grid(row=0,column=2, padx=21)
 
 # Načtení obrázku
 image_path = "TkinterProjects/project1/assets/skrblik.png"  # Nahraďte soubor a cestu k vašemu obrázku
@@ -46,3 +47,4 @@ img1_label.grid(row=2, column=0,pady=80  )
 
 #Main cycle 
 SCREEN = mainloop()
+
