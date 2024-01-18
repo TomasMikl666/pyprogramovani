@@ -25,11 +25,18 @@ def remove_text_item():
 def clear_all_list():
     list_box.delete(0,END)
 
+def save_list():
+     with open("tasks.txt", "w") as file:
+         my_tasks = list_box.get(0,END)
+         for one_task in my_tasks:
+            file.write(f"{one_task}\n")
+
+
 #Frames
 input_frame = Frame(SCREEN, bg=main_colour)
 text_frame = Frame(SCREEN, bg=main_colour)
 button_frame = Frame(SCREEN, bg=main_colour)
-input_frame.pack()
+input_frame.pack() 
 text_frame.pack()
 button_frame.pack()
 
@@ -59,7 +66,7 @@ remove_button.grid(row=0,column=0,padx=2,pady=10,ipadx=21)
 clear_button = Button(button_frame,text="Clear",borderwidth=2,font=main_font,bg=button_color,command=clear_all_list)
 clear_button.grid(row=0,column=1,padx=2,pady=10,ipadx=21)
 
-save_button = Button(button_frame,text="Save",borderwidth=2,font=main_font,bg=button_color)
+save_button = Button(button_frame,text="Save",borderwidth=2,font=main_font,bg=button_color,command= save_list)
 save_button.grid(row=0,column=2,padx=2,pady=10,ipadx=21)
 
 quit_button = Button(button_frame,text="Quit",borderwidth=2,font=main_font,bg=button_color,command=SCREEN.destroy)
