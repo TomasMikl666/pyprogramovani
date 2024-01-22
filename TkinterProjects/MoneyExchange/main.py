@@ -5,7 +5,7 @@ SCREEN = Tk()
 SCREEN.title("Money Exchange")
 SCREEN.geometry("450x200+600+300")
 SCREEN.minsize(250,250)
-SCREEN.iconbitmap("TkinterProjects/project1/assets/money_bag.ico")
+SCREEN.iconbitmap("TkinterProjects/MoneyExchange/assets/money_bag.ico")
 SCREEN.resizable(True,True)
 SCREEN.config(bg="#6fc77e")
 
@@ -35,7 +35,7 @@ exchange_button = Button(text="Exchange",command = count_currency,borderwidth=5,
 exchange_button.grid(row=0,column=2, padx=10)
 
 # Načtení obrázku
-image_path = "TkinterProjects/project1/assets/skrblik.png"  # Nahraďte soubor a cestu k vašemu obrázku
+image_path = "TkinterProjects/MoneyExchange/assets/skrblik.png"  # Nahraďte soubor a cestu k vašemu obrázku
 img1 = Image.open(image_path)
 img1 = img1.resize((200, 100))  # Přizpůsobení velikosti obrázku podle potřeby
 photo = ImageTk.PhotoImage(img1)

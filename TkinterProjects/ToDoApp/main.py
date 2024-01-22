@@ -1,18 +1,19 @@
 from tkinter import *
+from customtkinter import *
 
 #SCREEN
-SCREEN = Tk()
+SCREEN = CTk()
 SCREEN.title("TO-DO manager")
-SCREEN.geometry("450x450+600+300")
-SCREEN.iconbitmap("TkinterProjects/project2/assets/todoicon.ico")
-SCREEN.minsize(400,400)
+SCREEN.geometry("750x325+600+300")
+SCREEN.iconbitmap("TkinterProjects/ToDoApp/assets/todoicon.ico")
+SCREEN.minsize(750,325)
 SCREEN.resizable(False,False)
 
 #Fonts and colours
 main_font = ("Times New Roman",12)
 main_colour= "#4e99a6"
 button_color = "#dba95e"
-SCREEN.config(bg=main_colour)
+
 
 #Functions
 def add_text():
@@ -43,19 +44,19 @@ def open_tasks():
         print("Error in function for opening file: tasks.txt")
 
 #Frames
-input_frame = Frame(SCREEN, bg=main_colour)
-text_frame = Frame(SCREEN, bg=main_colour)
-button_frame = Frame(SCREEN, bg=main_colour)
+input_frame = CTkFrame(SCREEN)
+text_frame = CTkFrame(SCREEN)
+button_frame = CTkFrame(SCREEN)
 input_frame.pack() 
 text_frame.pack()
 button_frame.pack()
 
 #Input Frame
-user_input = Entry(input_frame,width=35,borderwidth=3,font=main_font)
+user_input = CTkEntry(input_frame,width=550)
 user_input.grid(row=0,column=0,padx=5,pady=5)
 user_input.focus()
 
-add_button = Button(input_frame, text="Add",borderwidth=2, font=main_font,bg=button_color, command=add_text)
+add_button = CTkButton(input_frame, text="Add", command=add_text,font=("Times New Roman", 20))
 add_button.grid(row=0,column=1,padx=5,pady=5,ipadx=20)
 
 #Scrollbar
@@ -63,23 +64,24 @@ text_scrollbar = Scrollbar(text_frame)
 text_scrollbar.grid(row=0,column=1,sticky=NS)
 
 #Text frame
-list_box = Listbox(text_frame,width=45,height=15,font=main_font,borderwidth=3,bg="#91c1db", yscrollcommand=text_scrollbar.set)
+list_box = Listbox(text_frame,width=122,height=15,bg="#91c1db", yscrollcommand=text_scrollbar.set)
 list_box.grid(row=0,column=0)
 
 #Scollbar&ListBox connection
 text_scrollbar.config(command=list_box.yview)
 
 #Button Frame
-remove_button = Button(button_frame,text="Remove",borderwidth=2,font=main_font,bg=button_color,command=remove_text_item)
+remove_button = CTkButton(button_frame,text="Remove",command=remove_text_item,font=("Times New Roman", 20))
+
 remove_button.grid(row=0,column=0,padx=2,pady=10,ipadx=21)
 
-clear_button = Button(button_frame,text="Clear",borderwidth=2,font=main_font,bg=button_color,command=clear_all_list)
+clear_button = CTkButton(button_frame,text="Clear",command=clear_all_list,font=("Times New Roman", 20))
 clear_button.grid(row=0,column=1,padx=2,pady=10,ipadx=21)
 
-save_button = Button(button_frame,text="Save",borderwidth=2,font=main_font,bg=button_color,command= save_list)
+save_button = CTkButton(button_frame,text="Save",command= save_list,font=("Times New Roman", 20))
 save_button.grid(row=0,column=2,padx=2,pady=10,ipadx=21)
 
-quit_button = Button(button_frame,text="Quit",borderwidth=2,font=main_font,bg=button_color,command=SCREEN.destroy)
+quit_button = CTkButton(button_frame,text="Quit",command=SCREEN.destroy,font=("Times New Roman", 20))
 quit_button.grid(row=0,column=3,padx=2,pady=10,ipadx=21)
 
 #Reload list to list_box
