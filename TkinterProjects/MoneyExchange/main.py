@@ -1,48 +1,76 @@
 from tkinter import *
-from PIL import Image, ImageTk
+import requests
+
+#Link for API: https://apilayer.com/marketplace/exchangerates_data-api
+
+#Settings
+main_color = "#2ebf91"
+active_color = "#1aad7f"
+main_font= "Helvetica"
+main_font_size = 18
+bg_color = "#6fc77e"
 #Screen
 SCREEN = Tk()
 SCREEN.title("Money Exchange")
-SCREEN.geometry("450x200+600+300")
-SCREEN.minsize(250,250)
+SCREEN.geometry("550x150+600+300")
+SCREEN.minsize(550,150)
 SCREEN.iconbitmap("TkinterProjects/MoneyExchange/assets/money_bag.ico")
 SCREEN.resizable(True,True)
-SCREEN.config(bg="#6fc77e")
+SCREEN.config(bg=bg_color)
 
 #Functions
 def count_currency():
-    amount_eur = float(amount_input.get()) / 24.58
-    result_label["text"] = round(amount_eur,2)
+    try:
+        currency_from = drop_down_currency1.get()
+        currency_to = drop_down_currency2.get()
+        amount = float(user_input.get())
+
+        #API
+        url = f"https://api.apilayer.com/exchangerates_data/convert?to={currency_to}&from={currency_from}&amount={amount}"
+
+        payload = {}
+        headers= {
+        "apikey": "ZmXdZWVpB03Rr01RU6kSOFeVZwi40O8U"
+        }
+        response = requests.request("GET", url, headers=headers, data = payload)
+
+        response.raise_for_status()
+        data_result = response.json()
+        result_label.config(text=data_result["result"])
+        
+    except:
+        result_label.config(text="Enter the amount")
 
 
 #Input
-amount_input = Entry(width=20, font=("Helvetica",15),borderwidth=5,relief="groove")
-amount_input.grid(row=0,column=0)
-amount_input.focus()
+user_input = Entry(width=20, font=(main_font,15),borderwidth=5,relief="groove",justify=CENTER)
+user_input.grid(row=0,column=0,padx=5)
+user_input.focus()
+
+#Roller1
+drop_down_currency1 = StringVar(SCREEN)
+drop_down_currency1.set("CZK")
+drop_down_currency_options1 = OptionMenu(SCREEN, drop_down_currency1, "CZK","EUR","USD","ARS")
+drop_down_currency_options1.config(bg=main_color, fg="white",font=(main_font,main_font_size) , activebackground=active_color,activeforeground="#d7e0de")
+drop_down_currency_options1.grid(row=0,column=1,padx=20,pady=5)
+
+#Roller2
+drop_down_currency2 = StringVar(SCREEN)
+drop_down_currency2.set("EUR")
+drop_down_currency_options2 = OptionMenu(SCREEN, drop_down_currency2, "CZK","EUR","USD","ARS")
+
+drop_down_currency_options2.config(bg=main_color, fg="white",font=(main_font,main_font_size) , activebackground=active_color,activeforeground="#d7e0de")
+drop_down_currency_options2.grid(row=1,column=1,padx=20,pady=5)
 
 #Label
-czk_currency = Label(text= "CZK", font=("Helvitca",14,"bold"),borderwidth=5,relief="groove")
-czk_currency.grid(row=0,column=1,padx=20)
-
-result_label = Label(text= "0", font=("Helvitca",14,"bold"),borderwidth=5,relief="groove")
+result_label = Label(text= "0", font=(main_font,14,"bold"),borderwidth=5,relief="groove",bg=main_color, fg="white",activebackground=active_color,activeforeground="#d7e0de")
 result_label.grid(row=1,column=0, padx=20)
 
-euro_currency = Label(text= "EUR", font=("Helvitca",14,"bold"),borderwidth=5,relief="groove")
-euro_currency .grid(row=1,column=1, padx=20)
-
 #Button
-exchange_button = Button(text="Exchange",command = count_currency,borderwidth=5,relief="groove",font=("Helvitca",12,"bold"))
-exchange_button.grid(row=0,column=2, padx=10)
+exchange_button = Button(text="Exchange",command = count_currency,borderwidth=5,relief="groove",font=(main_font,main_font_size,"bold"),bg=main_color, fg="white",activebackground=active_color,activeforeground="#d7e0de")
+exchange_button.grid(row=0,column=2, padx=10,pady=10)
 
-# Načtení obrázku
-image_path = "TkinterProjects/MoneyExchange/assets/skrblik.png"  # Nahraďte soubor a cestu k vašemu obrázku
-img1 = Image.open(image_path)
-img1 = img1.resize((200, 100))  # Přizpůsobení velikosti obrázku podle potřeby
-photo = ImageTk.PhotoImage(img1)
 
-# Vytvoření widgetu Label pro zobrazení obrázku
-img1_label = Label(SCREEN, image=photo, borderwidth=5,bg="#6fc77e")
-img1_label.grid(row=2, column=0,pady=80  )
 
 #Main cycle 
 SCREEN = mainloop()
