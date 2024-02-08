@@ -30,7 +30,7 @@ def count_currency():
 
         payload = {}
         headers= {
-        "apikey": "ZmXdZWVpB03Rr01RU6kSOFeVZwi40O8U"
+        "apikey": "your_api_key"
         }
         response = requests.request("GET", url, headers=headers, data = payload)
 
