@@ -42,7 +42,7 @@ custom_font = pygame.font.Font("pygame1/fonts/font1/font1.ttf",32)
 custom_font2 = pygame.font.Font("pygame1/fonts/font1/font1.ttf",20)
 
 #Text1
-custom_text =custom_font.render("HHHHHOOOOVNOOOZROUUT",True, black)
+custom_text =custom_font.render("PACMAN",True, black)
 custom_text_rect = custom_text.get_rect()
 custom_text_rect.center = (540, 25)
 
